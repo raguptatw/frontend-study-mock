@@ -32,6 +32,20 @@ const notes: Note[] = [
     createdAt: new Date(),
     updatedAt: new Date(),
   },
+  {
+    id: autoId++,
+    title: "Second Note",
+    description: "This is the second note",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: autoId++,
+    title: "Third Note",
+    description: "This is the third note",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
 ];
 
 app.get("/api/v1/notes", (req: Request, res: Response) => {

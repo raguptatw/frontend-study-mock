@@ -1,8 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Theme } from '@twilio-paste/core/theme';
-import { Table, TBody, THead, Tr, Td, Th, Grid, Column, Box, Heading, FormActions } from '@twilio-paste/core';
+import { Table, TBody, THead, Tr, Td, Th, Box, FormActions } from '@twilio-paste/core';
 import { Button } from '@twilio-paste/core/button';
 import { Input } from '@twilio-paste/core/input';
 import { Label } from '@twilio-paste/core/label';
@@ -23,25 +22,9 @@ const queryClient = new QueryClient()
 
 function App() {
   return (
-    <Theme.Provider theme="dark">
-
-      <Grid gutter="space20" vertical={[true, false, false]}>
-        <Column span={[12, 6, 6]} offset={[0, 2, 2]}>
-          <Box padding="space40">
-            <Heading as="h1" variant="heading10" marginBottom="space0">
-              Notes
-            </Heading>
-          </Box>
-          <Box padding="space20">
             <QueryClientProvider client={queryClient}>
               <Notes />
             </QueryClientProvider>
-          </Box>
-        </Column>
-
-      </Grid>
-
-    </Theme.Provider>
   );
 }
 
