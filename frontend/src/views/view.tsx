@@ -1,18 +1,22 @@
 import React from 'react';
 
 import Note from '../model/Note';
+import { useParams } from 'react-router-dom';
 
-interface ViewProps {
-    note: Note;
-}
 
-const View: React.FC<ViewProps> = ({ note }) => {
+interface ViewNoteProps {
+    noteId?: number;
+} 
+
+const ViewNote: React.FC<ViewNoteProps> = () => {
+    let { noteId } = useParams();
     return (
         <div>
-            <h2>{note.title}</h2>
-            <p>{note.id}</p>
+            <h2>Note: {noteId}</h2>
+            
+            
         </div>
     );
 };
 
-export default View;
+export default ViewNote;

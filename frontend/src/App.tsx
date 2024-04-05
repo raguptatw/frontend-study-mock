@@ -3,8 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Table, TBody, THead, Tr, Td, Th, Box, FormActions } from '@twilio-paste/core';
 import { Button } from '@twilio-paste/core/button';
-import { Input } from '@twilio-paste/core/input';
-import { Label } from '@twilio-paste/core/label';
+import { Stack } from '@twilio-paste/core/stack';
 import Note from './model/Note';
 
 import {
@@ -61,11 +60,11 @@ const Notes = () => {
             <Td>{new Date(note.createdAt).toLocaleDateString()}</Td>
             <Td>{new Date(note.updatedAt).toLocaleDateString()}</Td>
             <Td>
-              <FormActions>
-              <Button variant="primary">View</Button>
-              <Button variant="secondary">Edit</Button>
-              <Button variant="destructive">Delete</Button>
-              </FormActions>
+            <Stack orientation="horizontal" spacing="space30">
+              <a href={`/view/${note.id}`}><Button variant="primary" >View</Button></a>
+              <a href={`/edit/${note.id}`}><Button variant="secondary">Edit</Button></a>
+              <a href={`/delete/${note.id}`}><Button variant="destructive">Delete</Button></a>
+              </Stack>
             </Td>
           </Tr>
         

@@ -27,6 +27,14 @@ const router = createBrowserRouter([
     path: "/create",
     element: <CreateNote />,
   },
+  {
+    path: "/edit/:noteId",
+    element: <EditNote />,
+  },
+  {
+    path: "/view/:noteId",
+    element: <ViewNote />,
+  }
 ]);
 
 root.render(
