@@ -25,6 +25,21 @@ function App() {
 
 const Notes = () => {
 
+  const handleDelete = (e: any, noteId: number) => {
+    e.preventDefault();
+    console.log("Delete " + noteId);
+
+    axios.delete(backendUrl + '/api/v1/notes/' + noteId)
+      .then((res) => {
+        console.log(res);
+        queryClient.invalidateQueries({queryKey: ['getNotes']});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+  };
+
   const { isPending, error, data, isFetching } = useQuery({
     queryKey: ['getNotes'],
     queryFn: () =>
@@ -59,7 +74,7 @@ const Notes = () => {
             <Stack orientation="horizontal" spacing="space30">
               <a href={`/view/${note.id}`}><Button variant="primary" >View</Button></a>
               <a href={`/edit/${note.id}`}><Button variant="secondary">Edit</Button></a>
-              <a href={`/delete/${note.id}`}><Button variant="destructive">Delete</Button></a>
+              <Button variant="destructive" onClick={(e) => handleDelete(e,note.id)}>Delete</Button>
               </Stack>
             </Td>
           </Tr>
