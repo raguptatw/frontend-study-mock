@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-
 import {
     Heading, Form, Label, Input, FormActions, Button,
     FormControl, HelpText
 } from '@twilio-paste/core';
-
-
 
 import {
     useQuery,

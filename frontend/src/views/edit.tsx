@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import Note from '../model/Note';
 import { useParams } from 'react-router-dom';
 
@@ -34,10 +35,29 @@ const EditNote: React.FC<EditNoteProps> = () => {
 
 };
 
+interface IFormInput {
+    title: string;
+    description: string;
+}
+
 const FormNote: React.FC<EditNoteProps> = (props) => {
 
-    const handleSave = (e: any) => {
-        e.preventDefault();
+
+    const navigate = useNavigate();
+    const { register, handleSubmit } = useForm<IFormInput>();
+    const onSubmit: SubmitHandler<IFormInput> = data => {
+
+        console.log(data)
+
+        axios.put(backendUrl + '/api/v1/notes/' + props.noteId, data)
+            .then((res) => {
+                console.log(res);
+                navigate('/')
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
     };
 
     const { isPending, error, data, isFetching } = useQuery({
@@ -52,8 +72,9 @@ const FormNote: React.FC<EditNoteProps> = (props) => {
 
     if (error) return (<div>An error has occurred: + {error.message} </div>);
 
+
     return (
-        <Form >
+        <Form onSubmit={handleSubmit(onSubmit)}>
             <Heading
                 as="h3"
                 variant="heading20"
@@ -63,22 +84,24 @@ const FormNote: React.FC<EditNoteProps> = (props) => {
             </Heading>
             <FormControl>
                 <Label htmlFor="txtTitle" required>Title</Label>
-                <Input type="text" id="txtTitle" name="txtTitle" value={data.title}
-                    placeholder='Add Title' required></Input>
+                <Input type="text" id="txtTitle" defaultValue={data.title}
+                    placeholder='Add Title' required
+                    {...register("title", { required: true, maxLength: 20 })}
+                ></Input>
             </FormControl>
             <FormControl>
                 <Label htmlFor="txtDescription" required>Description</Label>
                 <Input
                     type="text"
                     id="txtDescription"
-                    name="txtDescription"
                     placeholder="Add Description"
                     required
-                    value={data.description}
+                    defaultValue={data.description}
+                    {...register("description", { required: true, maxLength: 50 })}
                 />
             </FormControl>
             <FormActions>
-                <Button variant="primary" onClick={handleSave}>Save</Button>
+                <Button variant="primary" type='submit'>Save</Button>
                 <a href='/'><Button variant="destructive">Cancel</Button></a>
             </FormActions>
         </Form>
