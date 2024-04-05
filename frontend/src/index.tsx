@@ -45,7 +45,7 @@ root.render(
         <Column span={[12, 6, 6]} offset={[0, 2, 2]}>
           <Box padding="space40">
             <Heading as="h1" variant="heading10" marginBottom="space0">
-              Notes
+              <a href="/">Notes</a>
             </Heading>
           </Box>
           <Box padding="space20">

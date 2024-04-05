@@ -54,6 +54,19 @@ app.get("/api/v1/notes", (req: Request, res: Response) => {
   });
 });
 
+app.get("/api/v1/notes/:id", (req: Request, res: Response) => {
+  const id = parseInt(req.params.id);
+  const note = notes.find((note) => note.id === id);
+
+  if (!note) {
+    return res.status(404).json({
+      message: "Note not found",
+    });
+  }
+  
+  res.status(200).json(note);
+});
+
 app.post("/api/v1/notes", (req: Request, res: Response) => {
   const note: Note = {
     id: autoId++,

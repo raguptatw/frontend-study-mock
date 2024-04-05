@@ -1,5 +1,3 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Table, TBody, THead, Tr, Td, Th, Box, FormActions } from '@twilio-paste/core';
 import { Button } from '@twilio-paste/core/button';
@@ -8,8 +6,6 @@ import Note from './model/Note';
 
 import {
   useQuery,
-  useMutation,
-  useQueryClient,
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
@@ -74,7 +70,7 @@ const Notes = () => {
     </Table>
     <Box padding="space40">
      <FormActions>
-      <Button variant="primary">Create Note</Button>
+      <a href='/create'><Button variant="primary">Create Note</Button></a>
       </FormActions>
     </Box>
   </>
