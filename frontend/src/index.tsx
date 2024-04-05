@@ -40,8 +40,8 @@ const router = createBrowserRouter([
 root.render(
   <React.StrictMode>
 
-  <Theme.Provider theme="dark">
-  <Grid gutter="space20" vertical={[true, false, false]}>
+    <Theme.Provider theme="dark">
+      <Grid gutter="space20" vertical={[true, false, false]}>
         <Column span={[12, 6, 6]} offset={[0, 2, 2]}>
           <Box padding="space40">
             <Heading as="h1" variant="heading10" marginBottom="space0">
@@ -49,13 +49,13 @@ root.render(
             </Heading>
           </Box>
           <Box padding="space20">
-          <RouterProvider router={router} />
+            <RouterProvider router={router} />
           </Box>
         </Column>
 
       </Grid>
-    
-  </Theme.Provider>
+
+    </Theme.Provider>
 
   </React.StrictMode>
 );

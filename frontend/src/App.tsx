@@ -17,9 +17,9 @@ const queryClient = new QueryClient()
 
 function App() {
   return (
-            <QueryClientProvider client={queryClient}>
-              <Notes />
-            </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <Notes />
+    </QueryClientProvider>
   );
 }
 
@@ -32,7 +32,7 @@ const Notes = () => {
     axios.delete(backendUrl + '/api/v1/notes/' + noteId)
       .then((res) => {
         console.log(res);
-        queryClient.invalidateQueries({queryKey: ['getNotes']});
+        queryClient.invalidateQueries({ queryKey: ['getNotes'] });
       })
       .catch((err) => {
         console.log(err);
@@ -51,7 +51,7 @@ const Notes = () => {
   if (isPending) return (<div>Loading...</div>);
 
   if (error) return (<div>An error has occurred: + {error.message} </div>);
-  
+
   return (
     <><Table>
       <THead>
@@ -64,31 +64,31 @@ const Notes = () => {
         </Tr>
       </THead>
       <TBody>
-        { data.items.map((note: Note) => (
+        {data.items.map((note: Note) => (
           <Tr key={note.id}>
             <Td>{note.title}</Td>
             <Td>{note.description}</Td>
             <Td>{new Date(note.createdAt).toLocaleDateString()}</Td>
             <Td>{new Date(note.updatedAt).toLocaleDateString()}</Td>
             <Td>
-            <Stack orientation="horizontal" spacing="space30">
-              <a href={`/view/${note.id}`}><Button variant="primary" >View</Button></a>
-              <a href={`/edit/${note.id}`}><Button variant="secondary">Edit</Button></a>
-              <Button variant="destructive" onClick={(e) => handleDelete(e,note.id)}>Delete</Button>
+              <Stack orientation="horizontal" spacing="space30">
+                <a href={`/view/${note.id}`}><Button variant="primary" >View</Button></a>
+                <a href={`/edit/${note.id}`}><Button variant="secondary">Edit</Button></a>
+                <Button variant="destructive" onClick={(e) => handleDelete(e, note.id)}>Delete</Button>
               </Stack>
             </Td>
           </Tr>
-        
+
         ))}
-       
+
       </TBody>
     </Table>
-    <Box padding="space40">
-     <FormActions>
-      <a href='/create'><Button variant="primary">Create Note</Button></a>
-      </FormActions>
-    </Box>
-  </>
+      <Box padding="space40">
+        <FormActions>
+          <a href='/create'><Button variant="primary">Create Note</Button></a>
+        </FormActions>
+      </Box>
+    </>
   );
 };
 
